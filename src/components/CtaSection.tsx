@@ -1,30 +1,41 @@
 import ctaChibi from "@/assets/cta-chibi.png";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { WHATSAPP_URL } from "@/lib/constants";
+import { useSiteData } from "@/hooks/use-site-data";
 
 const CtaSection = () => {
+  const { siteData, trackRegistration } = useSiteData();
+  const { cta } = siteData;
+
+  const handleRegister = async () => {
+    await trackRegistration('cta');
+    window.open(WHATSAPP_URL, '_blank', 'noopener,noreferrer');
+  };
+
   return (
     <section className="section-padding">
       <div className="container-narrow">
         <div className="rounded-3xl bg-gradient-hero p-8 md:p-14 text-center relative overflow-hidden">
           <Badge className="mb-4 bg-primary-foreground/20 text-primary-foreground border-primary-foreground/30 font-semibold text-sm px-4 py-1.5">
-            ⚡ Limited Slot
+            {cta.badge}
           </Badge>
 
           <h2 className="text-3xl md:text-5xl font-extrabold text-primary-foreground mb-4">
-            Mulai Karirmu di Digital Marketing Sekarang
+            {cta.title}
           </h2>
 
           <p className="text-primary-foreground/80 text-lg mb-8 max-w-xl mx-auto">
-            Jangan lewatkan kesempatan magang sambil menghasilkan. Slot terbatas!
+            {cta.description}
           </p>
 
           <Button
             variant="hero"
             size="lg"
             className="text-lg px-10 py-6 rounded-full bg-card text-foreground hover:bg-card/90 shadow-xl"
+            onClick={handleRegister}
           >
-            Daftar Program Magang
+            {cta.buttonText || "Daftar Program Magang"}
           </Button>
 
           <img

@@ -1,24 +1,10 @@
 import { Quote } from "lucide-react";
-
-const testimonials = [
-  {
-    text: "Selama magang saya dapat pengalaman dan komisi pertama saya. Sangat worth it!",
-    name: "Rina M.",
-    role: "Mahasiswa Komunikasi",
-  },
-  {
-    text: "Belajar digital marketing tapi juga bisa menghasilkan. Program ini beda dari yang lain.",
-    name: "Andi S.",
-    role: "Siswa SMK",
-  },
-  {
-    text: "Saya fresh graduate dan program ini memberikan saya portofolio nyata untuk melamar kerja.",
-    name: "Dina P.",
-    role: "Fresh Graduate",
-  },
-];
+import { useSiteData } from "@/hooks/use-site-data";
 
 const TestimonialSection = () => {
+  const { siteData } = useSiteData();
+  const { testimonials } = siteData;
+
   return (
     <section className="section-padding">
       <div className="container-narrow">
@@ -27,9 +13,9 @@ const TestimonialSection = () => {
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {testimonials.map((t, i) => (
+          {testimonials.map((t: any, i: number) => (
             <div
-              key={i}
+              key={t.id || i}
               className="rounded-2xl border border-border bg-card p-6 relative hover:shadow-lg transition-shadow duration-300"
             >
               <Quote className="h-8 w-8 text-primary/20 mb-3" />
