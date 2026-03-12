@@ -8,7 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Loader2, Save, Phone, MessageSquare } from "lucide-react";
 
 const SettingsAdmin = () => {
-  const { data, loading, updateSettings } = useSiteData();
+  const { siteData: data, loading, updateSettings } = useSiteData();
   const [formData, setFormData] = useState({
     whatsapp_number: "",
     whatsapp_message: ""
