@@ -39,8 +39,8 @@ const Login = () => {
       <Card className="w-full max-w-md shadow-lg">
         <CardHeader className="space-y-1 text-center">
           <div className="flex justify-center mb-4">
-            <div className="p-3 rounded-full bg-primary/10 text-primary">
-              <Lock className="h-6 w-6" />
+            <div className="size-16 rounded-xl overflow-hidden shadow-sm border border-border">
+              <img src="/favicon.ico" alt="Logo" className="size-full object-contain" />
             </div>
           </div>
           <CardTitle className="text-2xl font-bold">Admin Login</CardTitle>
