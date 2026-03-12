@@ -16,13 +16,13 @@ const SettingsAdmin = () => {
   const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
-    if (data.settings) {
+    if (data?.settings) {
       setFormData({
-        whatsapp_number: data.settings.whatsapp_number || "",
-        whatsapp_message: data.settings.whatsapp_message || ""
+        whatsapp_number: data.settings?.whatsapp_number || "",
+        whatsapp_message: data.settings?.whatsapp_message || ""
       });
     }
-  }, [data.settings]);
+  }, [data?.settings]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
