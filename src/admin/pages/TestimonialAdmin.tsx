@@ -6,7 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Quote, Plus, Trash2, Edit2 } from "lucide-react";
 import { useSiteData } from "@/hooks/use-site-data";
 import { toast } from "sonner";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter, DialogDescription } from "@/components/ui/dialog";
 
 const TestimonialAdmin = () => {
   const { siteData, addItem, updateItem, deleteItem } = useSiteData();
@@ -57,6 +57,9 @@ const TestimonialAdmin = () => {
           <DialogContent>
             <DialogHeader>
               <DialogTitle>{editingId ? "Edit Testimonial" : "Add New Testimonial"}</DialogTitle>
+              <DialogDescription>
+                Fill in the details below to {editingId ? "update the existing" : "create a new"} testimonial.
+              </DialogDescription>
             </DialogHeader>
             <div className="space-y-4 py-4">
               <div className="space-y-2">

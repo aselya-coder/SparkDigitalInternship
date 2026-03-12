@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Handshake, CheckCircle, TrendingUp, Plus, Trash2, Edit2 } from "lucide-react";
 import { useSiteData } from "@/hooks/use-site-data";
 import { toast } from "sonner";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter, DialogDescription } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const iconMap: Record<string, any> = {
@@ -63,6 +63,9 @@ const CommissionAdmin = () => {
           <DialogContent>
             <DialogHeader>
               <DialogTitle>{editingId ? "Edit Item" : "Add New Item"}</DialogTitle>
+              <DialogDescription>
+                Update the icon and description text for the commission section.
+              </DialogDescription>
             </DialogHeader>
             <div className="space-y-4 py-4">
               <div className="space-y-2">

@@ -6,7 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Plus, Trash2, Edit2 } from "lucide-react";
 import { useSiteData } from "@/hooks/use-site-data";
 import { toast } from "sonner";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter, DialogDescription } from "@/components/ui/dialog";
 
 const StepsAdmin = () => {
   const { siteData, addItem, updateItem, deleteItem } = useSiteData();
@@ -57,6 +57,9 @@ const StepsAdmin = () => {
           <DialogContent>
             <DialogHeader>
               <DialogTitle>{editingId ? "Edit Step" : "Add New Step"}</DialogTitle>
+              <DialogDescription>
+                Provide the step number, title, and description.
+              </DialogDescription>
             </DialogHeader>
             <div className="space-y-4 py-4">
               <div className="space-y-2">

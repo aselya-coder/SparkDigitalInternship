@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Plus, Trash2, Edit2, UserCog } from "lucide-react";
 import { useSiteData } from "@/hooks/use-site-data";
 import { toast } from "sonner";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter, DialogDescription } from "@/components/ui/dialog";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 const AdminManagement = () => {
@@ -60,6 +60,9 @@ const AdminManagement = () => {
           <DialogContent>
             <DialogHeader>
               <DialogTitle>{editingId ? "Edit Admin User" : "Add New Admin User"}</DialogTitle>
+              <DialogDescription>
+                Fill in the username, email, and role for the admin account.
+              </DialogDescription>
             </DialogHeader>
             <div className="space-y-4 py-4">
               <div className="space-y-2">

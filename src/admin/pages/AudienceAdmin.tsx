@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { GraduationCap, Briefcase, Rocket, Sparkles, Plus, Trash2, Edit2 } from "lucide-react";
 import { useSiteData } from "@/hooks/use-site-data";
 import { toast } from "sonner";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter, DialogDescription } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const iconMap: Record<string, any> = {
@@ -64,6 +64,9 @@ const AudienceAdmin = () => {
           <DialogContent>
             <DialogHeader>
               <DialogTitle>{editingId ? "Edit Audience" : "Add New Audience"}</DialogTitle>
+              <DialogDescription>
+                Select an icon and provide a description for the audience type.
+              </DialogDescription>
             </DialogHeader>
             <div className="space-y-4 py-4">
               <div className="space-y-2">
