@@ -19,6 +19,7 @@ import TestimonialAdmin from "@/admin/pages/TestimonialAdmin";
 import CtaAdmin from "@/admin/pages/CtaAdmin";
 import AdminManagement from "@/admin/pages/AdminManagement";
 import RegistrationsAdmin from "@/admin/pages/RegistrationsAdmin";
+import SettingsAdmin from "@/admin/pages/SettingsAdmin";
 import Login from "@/admin/pages/Login";
 import ProtectedRoute from "@/components/ProtectedRoute";
 
@@ -50,6 +51,7 @@ const App = () => (
               <Route path="cta" element={<CtaAdmin />} />
               <Route path="users" element={<AdminManagement />} />
               <Route path="registrations" element={<RegistrationsAdmin />} />
+              <Route path="settings" element={<SettingsAdmin />} />
             </Route>
 
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

@@ -1,16 +1,15 @@
 import heroChibi from "@/assets/hero-chibi.png";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { WHATSAPP_URL } from "@/lib/constants";
 import { useSiteData } from "@/hooks/use-site-data";
 
 const HeroSection = () => {
-  const { siteData, trackRegistration } = useSiteData();
+  const { siteData, trackRegistration, getWhatsAppUrl } = useSiteData();
   const { hero } = siteData;
 
   const handleRegister = async () => {
     await trackRegistration('hero');
-    window.open(WHATSAPP_URL, '_blank', 'noopener,noreferrer');
+    window.open(getWhatsAppUrl(), '_blank', 'noopener,noreferrer');
   };
 
   return (

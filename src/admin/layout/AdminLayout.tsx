@@ -51,6 +51,7 @@ const landingPageItems = [
 ];
 
 const managementItems = [
+  { icon: Settings, label: "General Settings", path: "/admin/settings" },
   { icon: ShieldCheck, label: "Manage Admins", path: "/admin/users" },
   { icon: UserCheck, label: "WhatsApp Registrations", path: "/admin/registrations" },
 ];

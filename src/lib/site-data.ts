@@ -68,5 +68,9 @@ export const INITIAL_SITE_DATA = {
     { id: "1", username: "admin", email: "admin@areakerja.com", role: "Super Admin" },
     { id: "2", username: "marketing", email: "marketing@areakerja.com", role: "Marketing Admin" },
   ],
+  settings: {
+    whatsapp_number: "6285646420488",
+    whatsapp_message: "Halo, saya tertarik untuk mendaftar program magang digital marketing di areakerja.com. Mohon info lebih lanjut."
+  },
   registrations: [] as any[]
 };

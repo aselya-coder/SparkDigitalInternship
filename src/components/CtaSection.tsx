@@ -1,16 +1,15 @@
 import ctaChibi from "@/assets/cta-chibi.png";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { WHATSAPP_URL } from "@/lib/constants";
 import { useSiteData } from "@/hooks/use-site-data";
 
 const CtaSection = () => {
-  const { siteData, trackRegistration } = useSiteData();
+  const { siteData, trackRegistration, getWhatsAppUrl } = useSiteData();
   const { cta } = siteData;
 
   const handleRegister = async () => {
     await trackRegistration('cta');
-    window.open(WHATSAPP_URL, '_blank', 'noopener,noreferrer');
+    window.open(getWhatsAppUrl(), '_blank', 'noopener,noreferrer');
   };
 
   return (

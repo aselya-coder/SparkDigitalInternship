@@ -50,6 +50,7 @@ export const useSiteData = () => {
         steps: steps || INITIAL_SITE_DATA.steps,
         cta: cta ? { ...cta, buttonText: cta.button_text || cta.buttonText } : INITIAL_SITE_DATA.cta,
         admins: admins || INITIAL_SITE_DATA.admins,
+        settings: settings ? settings.reduce((acc: any, curr: any) => ({ ...acc, [curr.key]: curr.value }), {}) : INITIAL_SITE_DATA.settings,
         registrations: registrations || [],
       });
     } catch (error: any) {
@@ -166,6 +167,28 @@ export const useSiteData = () => {
     }
   };
 
+  const updateSettings = async (settings: Record<string, string>) => {
+    try {
+      const updates = Object.entries(settings).map(([key, value]) => 
+        supabase.from('settings').upsert({ key, value })
+      );
+
+      const results = await Promise.all(updates);
+      const errors = results.filter(r => r.error).map(r => r.error);
+
+      if (errors.length > 0) throw errors[0];
+
+      setData((prev: any) => ({
+        ...prev,
+        settings: { ...prev.settings, ...settings }
+      }));
+      toast.success("Settings updated successfully!");
+    } catch (error) {
+      toast.error("Failed to update settings");
+      console.error(error);
+    }
+  };
+
   const trackRegistration = async (source: string) => {
     try {
       const { error } = await supabase
@@ -183,6 +206,12 @@ export const useSiteData = () => {
     }
   };
 
+  const getWhatsAppUrl = () => {
+    const number = data.settings?.whatsapp_number || "6285646420488";
+    const message = data.settings?.whatsapp_message || "Halo, saya tertarik untuk mendaftar program magang digital marketing di areakerja.com. Mohon info lebih lanjut.";
+    return `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
+  };
+
   return { 
     siteData: data, 
     loading,
@@ -191,6 +220,8 @@ export const useSiteData = () => {
     updateItem, 
     deleteItem,
     trackRegistration,
-    fetchAllData
+    fetchAllData,
+    updateSettings,
+    getWhatsAppUrl
   };
 };
