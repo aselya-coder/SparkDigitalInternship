@@ -10,17 +10,62 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     // Check current session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setLoading(false);
+    const checkSession = async () => {
+      try {
+        const { data: { session }, error } = await supabase.auth.getSession();
+        if (error) throw error;
+        
+        // Verifikasi apakah session masih valid di server (Supabase)
+        const { data: { user }, error: userError } = await supabase.auth.getUser();
+        if (userError || !user) {
+          setSession(null);
+        } else {
+          setSession(session);
+        }
+      } catch (error) {
+        console.error("Auth check failed:", error);
+        setSession(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    checkSession();
+
+    // Listen for auth changes (SIGNED_OUT, TOKEN_REFRESHED, etc.)
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+      console.log("Auth event:", event);
+      if (event === 'SIGNED_OUT' || event === 'USER_UPDATED') {
+        setSession(null);
+      } else if (session) {
+        setSession(session);
+      }
     });
 
-    // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-    });
+    // Pengecekan berkala (setiap 30 detik) untuk memastikan server masih terjangkau
+    const interval = setInterval(async () => {
+      const { error } = await supabase.from('hero').select('id').limit(1);
+      if (error && (error.code === 'PGRST301' || error.message.includes('fetch'))) {
+        // Jika error koneksi atau session invalid
+        console.error("Server unreachable or session expired, logging out...");
+        
+        // Hapus localStorage manual untuk memastikan tidak ada sisa sesi yang tersangkut
+        localStorage.removeItem('supabase.auth.token');
+        Object.keys(localStorage).forEach(key => {
+          if (key.includes('sb-') && key.includes('-auth-token')) {
+            localStorage.removeItem(key);
+          }
+        });
 
-    return () => subscription.unsubscribe();
+        await supabase.auth.signOut();
+        setSession(null);
+      }
+    }, 30000);
+
+    return () => {
+      subscription.unsubscribe();
+      clearInterval(interval);
+    };
   }, []);
 
   if (loading) {

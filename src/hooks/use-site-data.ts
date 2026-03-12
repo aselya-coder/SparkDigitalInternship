@@ -52,8 +52,17 @@ export const useSiteData = () => {
         admins: admins || INITIAL_SITE_DATA.admins,
         registrations: registrations || [],
       });
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error fetching from Supabase:", error);
+      
+      // Jika error 401 atau session invalid, paksa logout
+      if (error.code === 'PGRST301' || error.status === 401 || error.message?.includes('fetch')) {
+        toast.error("Sesi berakhir atau server tidak terjangkau. Mengalihkan ke login...");
+        supabase.auth.signOut().then(() => {
+          window.location.href = '/admin/login';
+        });
+      }
+
       // Fallback to initial data if Supabase fails (e.g. not configured)
       setData(INITIAL_SITE_DATA);
     } finally {
